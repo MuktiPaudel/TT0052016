@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
+            Teleamp Database
             <small>Version 1.0.0</small>
           </h1>
           <ol class="breadcrumb">
