@@ -15,23 +15,49 @@
 <!-- /.col -->
 <div id="collapsible-tables">
 <table class="col-sm-12 table-bordered table-striped table-hover table-condensed cf">
-<thead class="cf">
- <th>Field ID</th>
- <th>Amp Field</th>
- <th>Customer Name</th>
- <th>Address</th>
-</thead>
-<tbody style="margin-left:100px;">
 
- @foreach ($data as  $row)
+@if (isset($logs))
+  <thead class="cf">
+   <th>Data ID</th>
+   <th>Amp ID</th>
+   <th>Time</th>
+   <th>Volume</th>
+   <th>Battery</th>
+   <th>Temprature</th>
+   <th>Delay</th>
+  </thead>
+  <tbody style="margin-left:100px;">
 
-  <tr style="margin-left:20px;">
-     <td>{{$row->field_id}}</td>
-      <td>{{$row->field_name}} </td>
-        <td>{{$row->customer_name}} </td>
-         <td> {{$row->address}}</td>
-  </tr>
- @endforeach
+    @foreach ($logs as $row)
+      <tr style="margin-left:20px;">
+        <td>{{$row->data_id}}</td>
+         <td>{{$row->amp_id}} </td>
+           <td>{{$row->time}} </td>
+            <td> {{$row->amp_volume}}</td>
+            <td>{{$row->amp_battery}} </td>
+              <td>{{$row->temperature}} </td>
+               <td> {{$row->amp_delay}}</td>
+
+            </tr>
+    @endforeach
+@else
+    <thead class="cf">
+     <th>Field ID</th>
+     <th>Amp Field</th>
+     <th>Customer Name</th>
+     <th>Address</th>
+    </thead>
+    <tbody style="margin-left:100px;">
+     @foreach ($data as  $row)
+
+      <tr style="margin-left:20px;">
+         <td>{{$row->field_id}}</td>
+          <td>{{$row->field_name}} </td>
+            <td>{{$row->customer_name}} </td>
+             <td> {{$row->address}}</td>
+      </tr>
+     @endforeach
+ @endif
 </tbody>
 </table>
 </div>

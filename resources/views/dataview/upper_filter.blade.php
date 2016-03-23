@@ -5,41 +5,39 @@
       </div>
       <!-- /.box-header -->
       <!-- form start -->
-<form action="{{action('Teleamp_Controller@filter')}}"  role="form" method="post">
+<form action="{{action('Teleamp_Controller@filters')}}"  role="form" method="post">
+  <input type="hidden" name="page" value="amp_database">
          <div class="box-body">
     <div class="row">
       <div class="col-sm-3">
         <div class="form-group">
           <label>Field</label>
-          <select class="form-control select2" style="width: 100%;">
+          <select id="fields" name="fields" class="form-control select2" style="width: 100%;">
 
-               @foreach ($data as  $row)
+                  <option selected="selected">Fields</option>
+                        @foreach ($data as  $row)
+                    <option value="{{$row->field_id}}">{{$row->field_name}}</option><br>
+                       @endforeach
+          </select>
 
-                    <option name="field">{{$row->field_name}}</option><br>
-                @endforeach
           </select>
         </div>
       </div>
-      <div class="col-sm-3">
 
+      <div class="col-sm-3">
         <div class="form-group">
           <label>Group</label>
           <select id="groups" name="groups" class="form-control select2" style="width: 100%;">
             <option selected="selected">Group</option>
-            <option value="2">Right</option>
-            <option>Top</option>
-            <option>Bottom</option>
-            <option>Top-right</option>
-            <option>Top-left</option>
-            <option>Bottom-right</option>
           </select>
         </div>
       </div>
+
       <div class="col-sm-2">
         <div class="form-group">
           <label>Amplifiers</label>
           <select id="amplifiers" name="amplifiers" class="form-control select2" style="width: 100%;">
-            <option selected="selected">Amplifiers</option>            
+            <option selected="selected">Amplifiers</option>
           </select>
         </div>
       </div>

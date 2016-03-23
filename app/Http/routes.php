@@ -25,8 +25,14 @@ Route::get('amp_graphical','Teleamp_Controller@graphical');
 Route::get('ampmap_plan','Teleamp_Controller@mapplan');
 
 Route::get('/demo','Demo@index');
-Route::post('filter', 'Teleamp_Controller@filter');
+
+Route::post('filters', 'Teleamp_Controller@filters');
+
 Route::post('get_amplifiers', 'Teleamp_Controller@list_amplifiers');
+
+Route::post('get_amp_groups', 'Teleamp_Controller@list_groups');
+
+Route::post('get_chartfilter', 'Teleamp_Controller@limit_filter');
 
 
 /*

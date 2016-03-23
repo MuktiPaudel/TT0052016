@@ -22,6 +22,16 @@ class Teleamp_Controller extends Controller
       return view ('amp_install');
     }
 
+
+  public function list_groups(Request $request)
+   {
+    $groups = DB::table('amp_group')->
+    join('amp_field', 'amp_group.field_id', '=', 'amp_field.field_id')->
+    where('amp_field.field_id', $request['field'])->lists('amp_group.name', 'amp_group.group_id');
+
+    return response()->json($groups);
+    }
+
     public function list_amplifiers(Request $request)
     {
       $amplifiers = DB::table('amplifiers')->
@@ -30,6 +40,7 @@ class Teleamp_Controller extends Controller
 
       return response()->json($amplifiers);
     }
+
 
     public function save(Request $request)
     {
@@ -65,13 +76,50 @@ class Teleamp_Controller extends Controller
         $result = DB::table('amp_field')->get();
         $grp = DB::table('amp_group')->get();
         $amp = DB::table('amplifiers')->get();
-        $logs = DB::table('data_log')->get();
-        return view('amp_database', ['data'=> $result, 'groups' => $grp, 'amp'=> $amp, 'logs' => $logs]);
+        return view('amp_database', ['data'=> $result, 'groups' => $grp, 'amp'=> $amp]);
     }
-    public function filter(Request $request){
-      $user = DB::table('amp_field')->where('field_name', $request['field']);
-       return view('amp_database');
+
+    public function limit_filter(Request $request){
+      $fields = DB::table('amp_field')->get();
+       // for data logs in amp graphical
+      if (isset($request['amplifiers']) && $request['amplifiers'] > 0) {
+        $results = DB::table('data_log')->
+          where('amp_id', $request['amplifiers'])->get();
+        return view($request['page'], ['logs' => $results, 'data'=> $fields]);
+      }
+      return view('amp_graphical', ['data'=>$fields]);
     }
+
+    public function filters(Request $request){
+      $fields = DB::table('amp_field')->get();
+       // for data logs in amp graphical
+      if (isset($request['amplifiers']) && $request['amplifiers'] > 0) {
+        $results = DB::table('data_log')->
+          join('amplifiers', 'amplifiers.amp_id', '=', 'data_log.amp_id')->
+          where('amplifiers.amp_id', $request['amplifiers'])->get();
+        return view($request['page'], ['logs' => $results, 'data'=> $fields]);
+      }
+      // amp graphical data log ends here
+      if (isset($request['groups']) && $request['groups'] > 0) {
+        $results = DB::table('data_log')->
+          join('amplifiers', 'amplifiers.amp_id', '=', 'data_log.amp_id')->
+          join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id')->
+          where('amp_group.group_id', $request['groups'])->get();
+        return view($request['page'], ['logs' => $results, 'data'=> $fields]);
+      }
+      if (isset($request['fields']) && $request['fields'] > 0) {
+        $results = DB::table('data_log')->
+          join('amplifiers', 'amplifiers.amp_id', '=', 'data_log.amp_id')->
+          join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id')->
+          join('amp_field', 'amp_field.field_id', '=', 'amp_group.field_id')->
+          where('amp_field.field_id', $request['fields'])->get();
+        return view($request['page'], ['logs' => $results, 'data'=> $fields]);
+      }
+        //join('amp_groups', 'amp_group.fied_id')->where('field_name', $request['field']);
+       return view($request['page'],['data'=> $fields]);
+    }
+
+
 /***
   public function databasee()
             {
@@ -83,7 +131,8 @@ class Teleamp_Controller extends Controller
 
     public function graphical()
     {
-      return view ('amp_graphical');
+      $fields = DB::table('amp_field')->get();
+      return view ('amp_graphical', ['data'=> $fields]);
            //echo "You are dumb";
     }
 

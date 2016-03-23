@@ -1,5 +1,5 @@
 $(function () {
-    /* ChartJS     
+    /* ChartJS
      */
 
     //--------------
@@ -35,7 +35,7 @@ $(function () {
           data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27, 90]
         }
       ]
-	  
+
     };
 
 
@@ -77,10 +77,9 @@ $(function () {
       //Boolean - whether to make the chart responsive to window resizing
       responsive: true
     };
-	
-	
+
+
 
     //Create the line chart
     areaChart.Line(areaChartData, areaChartOptions);
   });
-  
