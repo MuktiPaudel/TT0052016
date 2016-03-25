@@ -25,6 +25,7 @@
    <th>Battery</th>
    <th>Temprature</th>
    <th>Delay</th>
+    <th>test</th>
   </thead>
   <tbody style="margin-left:100px;">
 
@@ -37,6 +38,7 @@
             <td>{{$row->amp_battery}} </td>
               <td>{{$row->temperature}} </td>
                <td> {{$row->amp_delay}}</td>
+                
 
             </tr>
     @endforeach

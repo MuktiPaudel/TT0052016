@@ -18,89 +18,45 @@
     epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
     projectTo = installmap.getProjectionObject(); //The map projection (Spherical Mercator)
 
-    var lonLat = new OpenLayers.LonLat( 25.465831,65.019906 ).transform(epsg4326, projectTo);
+    var lonLat = new OpenLayers.LonLat(center['center_latitude'], center['center_longitude']).transform(epsg4326, projectTo);
 
 
-    var zoom=17;
+    var zoom=15;
     installmap.setCenter (lonLat, zoom);
 
     var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
-    // Define markers as "features" of the vector layer:
-    var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.465466, 65.020550  ).transform(epsg4326, projectTo),
-            {description:'html'} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-	 var html = "<form-group>" +
+	  var html = "<form-group>" +
 
 				" <label>Amp-ID : 10</label>" +
-						    "<select class='form-control select2' style='width: 100%;'>"+
-							  "<option selected='selected'>Group</option>"+
-							  "<option>Left</option>"+
-							  "<option>Right</option>"+
-							  "<option>Front</option>"+
-							  "<option>Bottom</option>"+
-							  "<option>Front-Right</option>"+
-							  "<option>Front-Left</option>"+
+						    "<select name='name' class='form-control select2' style='width: 100%;'>"+
 							"</select>"+
 
-							"<br><select class='form-control select2' style='width: 100%;'>"+
+							"<br><select name='color' class='form-control select2' style='width: 100%;'>"+
 							  "<option selected='selected'>Color</option>"+
-							  "<option>Red</option>"+
-							  "<option>Green</option>"+
-							  "<option>Blue</option>"+
-							  "<option>Yellow</option>"+
-							  "<option>Pink</option>"+
-							  "<option>Black</option>"+
+							  "<option value='Red'>Red</option>"+
+							  "<option value='Green'>Green</option>"+
+							  "<option value='Blue'>Blue</option>"+
+							  "<option value='Yellow'>Yellow</option>"+
+							  "<option value='Black'>Black</option>"+
+							  "<option value='Indigo'>Indigo</option>"+
+                "<option value='Purple'>Purple</option>"+
+							  "<option value='Brown'>Brown</option>"+
 							"</select>"+
-
-							"<br><button type='button' onclick='saveData()' class='btn btn-block btn-success'>Save</button>";
+  						"<br><button type='button' onclick='saveData()' class='btn btn-block btn-success'>Save</button>";
 
 					"</form-group>";
 
-
-    var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.465552, 65.019104 ).transform(epsg4326, projectTo),
-            {description:html} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-
-	 var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.465102, 65.020201 ).transform(epsg4326, projectTo),
-            {description:'html'} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-    var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.464984, 65.019480).transform(epsg4326, projectTo),
-            {description:'London Eye'} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-    var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.466689, 65.020260).transform(epsg4326, projectTo),
-            {description:'London Eye'} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-    installmap.addLayer(vectorLayer);
-
-    var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( 25.466636, 65.019458).transform(epsg4326, projectTo),
-            {description:'London Eye'} ,
-            {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
-        );
-    vectorLayer.addFeatures(feature);
-
-    installmap.addLayer(vectorLayer);
+      for (var i = 0; i < coordinates.length; i++) {
+        // Define markers as "features" of the vector layer:
+        var feature = new OpenLayers.Feature.Vector(
+                new OpenLayers.Geometry.Point( coordinates[i]['amp_latitude'], coordinates[i]['amp_longitude'] ).transform(epsg4326, projectTo),
+                {description: html} ,
+                {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+            );
+        vectorLayer.addFeatures(feature);
+        installmap.addLayer(vectorLayer);
+      }
 
     //Add a selector control to the vectorLayer with popup functions
     var controls = {

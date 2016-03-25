@@ -15,7 +15,7 @@
                 <select id="fields" name="fields" class="form-control select2" style="width: 100%;">
 
                         <option selected="selected">Fields</option>
-                              @foreach ($data as  $row)
+                            @foreach ($data as  $row)
                           <option value="{{$row->field_id}}">{{$row->field_name}}</option><br>
                              @endforeach
                 </select>

@@ -244,14 +244,13 @@ document.getElementById('locate').onclick = function() {
 //
 // end code for 'locate me button'
 //
+/**
 document.getElementById('setLatLon').onclick = function() {
   var point = new OpenLayers.LonLat(document.getElementById('frmLon').value, document.getElementById('frmLat').value);
   map.setCenter(point.transform(projWGS84, map.getProjectionObject()), map.getZoom());
   updateLocation(map.getCenter(), map.getZoom());
   placeMark(map.getCenter());
-
-
 };
-
+**/
 
     }

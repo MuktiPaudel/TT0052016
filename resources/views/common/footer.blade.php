@@ -14,6 +14,9 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/js/OpenStreetMap.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/fieldMap.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampInstallMap.js') }}" ></script>
+@if(isset($field_coordinates) && !empty($field_coordinates))
+<script type="text/javascript" src="{{ asset('assets/plugins/maps/ampmap_plan.js') }}" ></script>
+@endif
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampcenter.js') }}" ></script>
 
 <!-- jQuery 2.1.4 -->

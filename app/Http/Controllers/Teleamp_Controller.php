@@ -18,8 +18,13 @@ class Teleamp_Controller extends Controller
 
     public function install()
     {
+      $field = DB::table('amp_field')->first();
+
     //  $result = DB::table('amp_field')->get();
-      return view ('amp_install');
+      $amp_coordinates = json_encode(DB::table('amplifiers')->select('amp_id', 'amp_latitude', 'amp_longitude')->get());
+      $field_coordinates = json_encode($field);
+
+      return view ('amp_install', ['field' => $field, 'amp_coordinates' => $amp_coordinates, 'field_coordinates' => $field_coordinates]);
     }
 
 
@@ -47,9 +52,12 @@ class Teleamp_Controller extends Controller
         $post = $request->all();
         $v    = \Validator::make($request->all(),
         [
-            'field_name'    => 'required',
-            'customer_name' => 'required',
-            'address'       => 'required',
+            'field_name'        => 'required',
+            'customer_name'     => 'required',
+            'address'           => 'required',
+            'temperature'       => 'required',
+            'center_latitude'   => 'required',
+            'center_longitude'  => 'required',
         ]);
         if($v->fails())
         {
@@ -58,11 +66,20 @@ class Teleamp_Controller extends Controller
         else
         {
           $data = array(
-            'field_name'    => $post['field_name'],
-            'customer_name' => $post['customer_name'],
-            'address'       => $post['address'],
+            'field_name'             => $post['field_name'],
+            'customer_name'          => $post['customer_name'],
+            'address'                => $post['address'],
+            'temperature'            => $post['temperature'],
+            'center_latitude'        => $post['center_latitude'],
+            'center_longitude'       => $post['center_longitude'],
           );
-          $i = DB::table('amp_field')->insert($data);
+          $i = 0;
+          if (isset($post['field_id'])) {
+            $i = DB::table('amp_field')->where('field_id', $post['field_id'])->update($data);
+          }
+          else {
+            $i = DB::table('amp_field')->insert($data);
+          }
           if($i > 0)
            {
              \Session::flash('message','Record have been added successfully');
@@ -133,13 +150,30 @@ class Teleamp_Controller extends Controller
     {
       $fields = DB::table('amp_field')->get();
       return view ('amp_graphical', ['data'=> $fields]);
-           //echo "You are dumb";
+           //echo "You are here";
     }
 
-    public function mapplan()
+    public function mapplan(Request $request)
     {
-      return view ('ampmap_plan');
-           //echo "You are dumb";
+      $fields = DB::table('amp_field')->get();
+      //  $result = DB::table('amp_field')->get();
+      $query = DB::table('amplifiers')
+      ->join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id');
+
+      if (isset($request['field_id'])) {
+        $query = $query->where('amp_group.field_id', $request['field_id']);
+      }
+
+      $query = $query->select('amp_id', 'amplifiers.group_id', 'color', 'name', 'amp_latitude', 'amp_longitude')
+      ->get();
+
+      $amp_coordinates = json_encode($query);
+      $field_coordinates = [];
+      if (isset($request['field_id']))
+        $field_coordinates = json_encode(DB::table('amp_field')->where('field_id', $request['field_id'])->select('field_id', 'center_latitude', 'center_longitude')->first());
+
+      return view ('ampmap_plan', ['fields' => $fields, 'amp_coordinates' => $amp_coordinates, 'field_coordinates' => $field_coordinates]);
+
     }
 
 }
