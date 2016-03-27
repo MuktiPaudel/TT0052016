@@ -21,6 +21,11 @@
 
     <link href="{{ asset('assets/plugins/maps/css/style.css') }}" rel="stylesheet" type="text/css" >
 
+
+    <!-- iCheck -->
+    <link href="{{ asset('assets/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" >
+
+
   </head>
   <body class="hold-transition skin-green sidebar-mini" style="height:100%;">
     <div class="wrapper">

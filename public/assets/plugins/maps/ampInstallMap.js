@@ -26,13 +26,16 @@
 
     var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
-	  var html = "<form-group>" +
+	  var html =
+        "<div class='box-body'>"+
+         "<div class='row'>"+
+          "<div class='col-md-9 col-sm-6'>"+
+           "<form-group id='group_form'>" +
 
 				" <label>Amp-ID : 10</label>" +
-						    "<select name='name' class='form-control select2' style='width: 100%;'>"+
-							"</select>"+
+						    "<input id='group_id' type='text' name='field_group' class='form-control' value 'whatever'style='width: 100%;'></input>"+
 
-							"<br><select name='color' class='form-control select2' style='width: 100%;'>"+
+				"<br><select id='group_color' name='color' class='form-control select2' style='width: 100%;'>"+
 							  "<option selected='selected'>Color</option>"+
 							  "<option value='Red'>Red</option>"+
 							  "<option value='Green'>Green</option>"+
@@ -42,10 +45,14 @@
 							  "<option value='Indigo'>Indigo</option>"+
                 "<option value='Purple'>Purple</option>"+
 							  "<option value='Brown'>Brown</option>"+
-							"</select>"+
-  						"<br><button type='button' onclick='saveData()' class='btn btn-block btn-success'>Save</button>";
+						"</select>"+
 
-					"</form-group>";
+  						"<br><button id='markers_btn' type='button' class='btn btn-block btn-success'>Save</button>";
+
+					"</form-group>"+
+          "</div>"+
+          "</div>"+
+    "</div>";
 
       for (var i = 0; i < coordinates.length; i++) {
         // Define markers as "features" of the vector layer:

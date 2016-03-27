@@ -21,7 +21,7 @@ ampmap_plan = new OpenLayers.Map("devicemap_plan", {
    var lonLat = new OpenLayers.LonLat(center['center_latitude'], center['center_longitude']).transform(epsg4326, projectTo);
 
 
-   var zoom=17;
+   var zoom=16;
    ampmap_plan.setCenter (lonLat, zoom);
 
    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
@@ -31,7 +31,7 @@ ampmap_plan = new OpenLayers.Map("devicemap_plan", {
      // Define markers as "features" of the vector layer:
      var feature = new OpenLayers.Feature.Vector(
              new OpenLayers.Geometry.Point( coordinates[i]['amp_latitude'], coordinates[i]['amp_longitude'] ).transform(epsg4326, projectTo),
-             {description:'html'} ,
+             {description:( coordinates[i]['amp_id'])} ,
              {externalGraphic: 'assets/plugins/maps/js/img/marker-red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
          );
      vectorLayer.addFeatures(feature);
@@ -63,7 +63,7 @@ ampmap_plan = new OpenLayers.Map("devicemap_plan", {
                "<option>Black</option>"+
              "</select>"+
 
-             "<br><button type='button' onclick='saveData()' class='btn btn-block btn-success'>Save</button>";
+             "<br><button type='button' onclick='' class='btn btn-block btn-success'>Save</button>";
 
          "</form-group>";
 

@@ -18,7 +18,6 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampmap_plan.js') }}" ></script>
 @endif
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampcenter.js') }}" ></script>
-
 <!-- jQuery 2.1.4 -->
 <script type="text/javascript" src="{{ asset('assets/plugins/jQuery/jQuery-2.1.4.min.js') }}" ></script>
 <!-- Bootstrap 3.3.5 -->
@@ -26,10 +25,28 @@
 <!-- AdminLTE App -->
 <script type="text/javascript" src="{{ asset('assets/dist/js/app.min.js') }}" ></script>
 <!-- ChartJS 1.0.1 -->
+<!-- iCheck -->
+<script type="text/javascript" src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}" ></script>
 
+<!--selectable dropdown inpupt  -->
+<!-- <script type="text/javascript" src="{{ asset('assets/plugins/selectable/jquery.js') }}" ></script>
+     <script type="text/javascript" src="{{ asset('assets/plugins/selectable/selectize.js') }}" ></script>
+     <script type="text/javascript" src="{{ asset('assets/plugins/selectable/index.js') }}" ></script>
+-->
 <script>
 $(document).ready(function() {
   console.log("loaded");
+
+  $('body').on('click', '#markers_btn', function () {
+    //alert($('#group_id').value());
+    console.log('clicked');
+  });
+
+  function saveData() {
+
+  }
+
+
 $('#groups').on('change', function() {
   console.log("value changed");
   if ($(this).val())
@@ -86,6 +103,15 @@ $('#fields').on('change', function() {
 });
 
 });
+</script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-green',
+      increaseArea: '50%' // optional
+    });
+  });
 </script>
 @if(isset($logs))
 <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}" ></script>
@@ -169,7 +195,6 @@ $(function () {
     //Create the line chart
     areaChart.Line(areaChartData, areaChartOptions);
   });
-
 </script>
 @endif
 </body>

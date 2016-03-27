@@ -29,32 +29,32 @@
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
 
-      <li>
-        <a href="">
+      <li class="{{ Request::is('dashboard') ? "active" : "" }}">
+        <a href="/dashboard">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
 
-      <li>
-        <a href="">
+      <li class="{{ Request::is('amp_install') ? "active" : "" }}">
+        <a href="/amp_install">
           <i class="fa fa-cog"></i> <span>Installation</span>
         </a>
       </li>
 
-      <li>
-        <a href="">
+      <li class="{{ Request::is('amp_database') ? "active" : "" }}">
+        <a href="/amp_database">
           <i class="fa fa-database"></i> <span>System Data</span>
         </a>
       </li>
 
-      <li>
-        <a href="">
+      <li class="{{ Request::is('amp_graphical') ? "active" : "" }}">
+        <a href="/amp_graphical">
           <i class="fa fa-area-chart"></i> <span>Monitoring</span>
         </a>
       </li>
 
-      <li>
-        <a href="">
+      <li class="{{ Request::is('ampmap_plan') ? "active" : "" }}">
+        <a href="ampmap_plan">
           <i class="fa fa-map-marker"></i> <span>Maps</span>
         </a>
       </li>

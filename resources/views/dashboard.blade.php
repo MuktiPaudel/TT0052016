@@ -76,7 +76,7 @@
               <!-- MAP & BOX PANE -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Visitors Report</h3>
+                  <h3 class="box-title">Field Report</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -94,18 +94,23 @@
                       <div class="pad box-pane-right bg-green" style="min-height: 670px">
                         <div class="description-block margin-bottom">
                           <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
+                          <h5 class="description-header">390</h5>
+                          <span class="description-text">Field Reports</span>
+                        </div><!-- /.description-block -->
+                        <div class="description-block margin-bottom">
+                          <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
                           <h5 class="description-header">8390</h5>
-                          <span class="description-text">Visits</span>
+                          <span class="description-text">Group Reports</span>
                         </div><!-- /.description-block -->
                         <div class="description-block margin-bottom">
                           <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
                           <h5 class="description-header">30%</h5>
-                          <span class="description-text">Referrals</span>
+                          <span class="description-text">Amplifiers Report</span>
                         </div><!-- /.description-block -->
                         <div class="description-block">
                           <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
                           <h5 class="description-header">70%</h5>
-                          <span class="description-text">Organic</span>
+                          <span class="description-text">User's Report</span>
                         </div><!-- /.description-block -->
                       </div>
                     </div><!-- /.col -->
@@ -117,7 +122,7 @@
         <div class="row">
             <div class="col-md-6">
                <div class="box-header with-border">
-                 <a class="btn btn-block btn-social btn-google">
+                 <a href="/ampmap_plan" class="btn btn-block btn-social btn-google">
                  <i class="fa fa-database"></i> Work on existing system.
                  </a>
                 </div><!-- /.box-header -->
@@ -125,7 +130,7 @@
 
             <div class="col-md-6">
                <div class="box-header with-border">
-                <a class="btn btn-block btn-social btn-tumblr">
+                <a href="/amp_install" class="btn btn-block btn-social btn-tumblr">
                  <i class="fa fa-search"></i> Scan the new system.
                 </a>
               </div><!-- /.box-header -->
