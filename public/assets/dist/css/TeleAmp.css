@@ -4073,6 +4073,67 @@ table.text-center th {
  * checkbox
  * ---------------
  */
+ 
+ .ckbox
+         {
+             width: 50px;
+             height: 50px;
+         }
+         /*  position of main custom checkbox   */
+ .custom-checkbox
+         {
+             position: relative;
+             display: inline-block;
+         }
+         /*  craete custom checkbox in place of actual checkbox */
+ .custom-checkbox > .box
+         {
+             position: relative;
+             display: block;
+             width: 35px;
+             height: 35px; /* set custom checkbox background color    */
+             background-color: #3C4742;
+             padding: 0px;
+             margin: 4px;
+         }
+         /*  check sign position, color, width and height    */
+ .custom-checkbox > .box > .tick
+         {
+             position: absolute;
+             left: 3px;
+             top: 5px;
+             width: 30px;
+             height: 15px;
+        /*  set check sign width */
+             border-bottom: 7px solid #00A65A;
+             border-left: 7px solid #00A65A;
+             -webkit-transform: rotate(-45deg);
+             -moz-transform: rotate(-45deg);
+             -o-transform: rotate(-45deg);
+             -ms-transform: rotate(-45deg);
+             transform: rotate(-45deg);
+             display: none;
+         }
+         /*  input checked unchecked action    */
+ .custom-checkbox > input:checked + .box > .tick
+         {
+             display: block;
+         }
+         /*  input checked unchecked position and width and height    */
+ .custom-checkbox > input
+         {
+             position: absolute;
+             outline: none;
+             left: 4px;
+             top: 4px;
+             padding: 0;
+             width: 40px;
+             height: 40px;
+             border: none;
+             margin: 0;
+             opacity: 0;
+             z-index: 1;
+         }
 
 
 /*

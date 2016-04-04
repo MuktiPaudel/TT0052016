@@ -121,18 +121,23 @@
 
                                         <div class="row">
 
-                                         <div class="col-sm-3">
-                                             <label>  Power Saving   </label>
-                                             <div class="checkbox pull-right">
-                                                  <input name="amp_ps" type="checkbox" id="chkPermission" class="ckbox" value="1" {!! $amp['amp_ps'] == 1 ? "checked='checked'" : ""  !!}>
-
-                                             </div>
-                                            </div><!-- /.col -->
+                                          <div class="col-sm-3">
+                                              <label>  Power Saving   </label> <br>
+                                              <div class="custom-checkbox ">
+                                                   <input name="amp_ps" type="checkbox" id="chkPermission" class="ckbox" value="1" {!! $amp['amp_ps'] == 1 ? "checked='checked'" : ""  !!}>
+                                                   <span class="box">
+                                                       <span class="tick"></span>
+                                                   </span>
+                                              </div>
+                                             </div><!-- /.col -->
 
                                             <div class="col-sm-3">
-                                               <label> Amplifier Mute  </label>
-                                               <div class="checkbox" style="font-size:500px; width:200px;">
-                                                  <input name="amp_mute" type="checkbox" value="1" {!! $amp['amp_mute'] == 1 ? "checked='checked'" : ""  !!}>
+                                               <label> Amplifier Mute  </label><br>
+                                               <div class="custom-checkbox">
+                                                  <input name="amp_mute" type="checkbox" d="chkPermission" class="ckbox" value="1" {!! $amp['amp_mute'] == 1 ? "checked='checked'" : ""  !!}>
+                                                  <span class="box">
+                                                      <span class="tick"></span>
+                                                  </span>
                                                </div>
                                              </div><!-- /.col -->
                                              <div class="col-sm-3">
@@ -142,7 +147,7 @@
                                               </div>
                                               </div><!-- /.col -->
                                               <div class="col-sm-3">
-                                                <label style="margin-bottom:15px;">Temprature</label>
+                                                <label style="margin-bottom:15px;">Temperature</label>
                                                 <div>
                                                  <input name="temperature" type="number" min="-50" max="50" value="{{ $amp['temperature'] }}" class="form-control">
                                                 </div>
@@ -178,81 +183,6 @@
 
 
       </div><!-- /.content-wrapper -->
-      <style type="text/css">
-        /*  size(width and height) of  main checkbox */
-.ckbox
 
-        {
-
-            width: 25px;
-
-            height: 25px;
-
-        }
-
-        /*  position of main custome checkbox   */
-.custom-checkbox
-        {
-            position: relative;
-            display: inline-block;
-        }
-        /*  craete custom checkbox in place of actual checkbox */
-.custom-checkbox > .box
-        {
-            position: relative;
-            display: block;
-            width: 25px;
-            height: 25px; /* set custom checkbox background color    */
-            background-color: #E5E5E5;
-            padding: 0px;
-            margin: 0px;
-        }
-        /*  check sign position, color, width and height    */
-.custom-checkbox > .box > .tick
-        {
-            position: absolute;
-            left: 4px;
-            top: 7px;
-            width: 14px;
-            height: 6px;
-       /*  set check sign width */
-            border-bottom: 4px solid #000;
-            border-left: 4px solid #000;
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-            display: none;
-        }
-        /*  input checked unchecked action    */
-.custom-checkbox > input:checked + .box > .tick
-        {
-            display: block;
-        }
-
-        /*  input checked unchecked position and width and height    */
-
-.custom-checkbox > input
-        {
-            position: absolute;
-            outline: none;
-
-            left: 0;
-
-            top: 0;
-
-            padding: 0;
-
-            width: 25px;
-
-            height: 25px;
-
-            border: none;
-            margin: 0;
-            opacity: 0;
-            z-index: 1;
-        }
-    </style>
 
     @endsection
