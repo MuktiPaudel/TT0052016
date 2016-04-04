@@ -56,8 +56,9 @@
     @if(!empty($field_coordinates))
       <div class="box box-success">
         <div class="box-header with-border">
-                    <h3 class="box-title">TeleAmp Field : Raatin Uimahalli</h3>
-
+                  @if(isset($field_selection))
+                    <h3 class="box-title">Field Name: {{ $field_selection['field']->field_name }}</h3>
+                  @endif
                     <div class="box-tools pull-right">
                       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                       </button>
@@ -98,15 +99,18 @@
                             <td><a href="#">{{ $amp['amp_id'] }}</a></td>
                             <td>{{ $amp['name'] }}</td>
                             <td><img src="assets/plugins/maps/js/img/marker-{{ $amp['color'] }}.png"></td>
-                            <td><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                            <td><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal_{{ $amp['amp_id'] }}">
                               <i class="fa fa-md fa-gears (alias)"></i>
 
                             </button>
                             </td>
                           </tr>
-                          @endforeach
 
-                          <div id='myModal' class="modal">
+
+                          <div id="myModal_{{ $amp['amp_id'] }}" class="modal">
+                            <form action="{{action('Teleamp_Controller@edit_amp_details')}}" method="POST">
+                              <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
+                              <input type="hidden" name="amp_id" value="{{ $amp['amp_id'] }}">
                                      <div class="modal-dialog">
                                        <div class="modal-content">
                                          <div class="modal-header">
@@ -114,42 +118,48 @@
                                            <h4 class="modal-title">Settings</h4>
                                          </div>
                                          <div class="modal-body">
+
                                         <div class="row">
-                                           <div class="col-sm-4">
+
+                                         <div class="col-sm-3">
                                              <label>  Power Saving   </label>
-                                             <div class="checkbox icheck">
-                                                  <input type="checkbox"></input>
+                                             <div class="checkbox pull-right">
+                                                  <input name="amp_ps" type="checkbox" id="chkPermission" class="ckbox" value="1" {!! $amp['amp_ps'] == 1 ? "checked='checked'" : ""  !!}>
+
                                              </div>
                                             </div><!-- /.col -->
-                                            <div class="col-sm-4">
+
+                                            <div class="col-sm-3">
                                                <label> Amplifier Mute  </label>
-                                               <div class="checkbox icheck ">
-                                                  <input type="checkbox">
+                                               <div class="checkbox" style="font-size:500px; width:200px;">
+                                                  <input name="amp_mute" type="checkbox" value="1" {!! $amp['amp_mute'] == 1 ? "checked='checked'" : ""  !!}>
                                                </div>
                                              </div><!-- /.col -->
-                                             <div class="col-sm-4">
+                                             <div class="col-sm-3">
                                                <label style="margin-bottom:15px;">Volume Level</label>
                                                <div>
-                                                <select class="form-control">
-                                                  <option>1</option>
-                                                  <option>2</option>
-                                                  <option>3</option>
-                                                  <option>400</option>
-                                                </select>
+                                                <input name="amp_volume" type="number" min="1" max="100" value="{{ $amp['amp_volume'] }}" class="form-control">
                                               </div>
                                               </div><!-- /.col -->
+                                              <div class="col-sm-3">
+                                                <label style="margin-bottom:15px;">Temprature</label>
+                                                <div>
+                                                 <input name="temperature" type="number" min="-50" max="50" value="{{ $amp['temperature'] }}" class="form-control">
+                                                </div>
+                                               </div><!-- /.col -->
                                          </div>
 
                                        </div>
                                          <div class="modal-footer">
                                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                           <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                           <button type="submit" class="btn btn-primary">Save changes</button>
                                          </div>
                                        </div><!-- /.modal-content -->
                                      </div><!-- /.modal-dialog -->
+                                   </form>
                                    </div><!-- /.modal -->
 
-
+                        @endforeach
 
             </tbody>
                       </table>
@@ -168,5 +178,81 @@
 
 
       </div><!-- /.content-wrapper -->
+      <style type="text/css">
+        /*  size(width and height) of  main checkbox */
+.ckbox
+
+        {
+
+            width: 25px;
+
+            height: 25px;
+
+        }
+
+        /*  position of main custome checkbox   */
+.custom-checkbox
+        {
+            position: relative;
+            display: inline-block;
+        }
+        /*  craete custom checkbox in place of actual checkbox */
+.custom-checkbox > .box
+        {
+            position: relative;
+            display: block;
+            width: 25px;
+            height: 25px; /* set custom checkbox background color    */
+            background-color: #E5E5E5;
+            padding: 0px;
+            margin: 0px;
+        }
+        /*  check sign position, color, width and height    */
+.custom-checkbox > .box > .tick
+        {
+            position: absolute;
+            left: 4px;
+            top: 7px;
+            width: 14px;
+            height: 6px;
+       /*  set check sign width */
+            border-bottom: 4px solid #000;
+            border-left: 4px solid #000;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            display: none;
+        }
+        /*  input checked unchecked action    */
+.custom-checkbox > input:checked + .box > .tick
+        {
+            display: block;
+        }
+
+        /*  input checked unchecked position and width and height    */
+
+.custom-checkbox > input
+        {
+            position: absolute;
+            outline: none;
+
+            left: 0;
+
+            top: 0;
+
+            padding: 0;
+
+            width: 25px;
+
+            height: 25px;
+
+            border: none;
+            margin: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+    </style>
 
     @endsection

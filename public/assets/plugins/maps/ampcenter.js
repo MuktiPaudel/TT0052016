@@ -101,7 +101,7 @@ function updateLocation(lonlat, zoom) {
 
     function init(){
 
-        map = new OpenLayers.Map("map", {
+  map = new OpenLayers.Map("map", {
   projection: new OpenLayers.Projection("EPSG:900913"),
   displayProjection: new OpenLayers.Projection("EPSG:4326")
 });
@@ -234,7 +234,7 @@ geolocate.events.register("locationfailed",this,function() {
   OpenLayers.Console.log('Location detection failed');
 });
 document.getElementById('locate').onclick = function() {
-    vector.removeAllFeatures();
+  vector.removeAllFeatures();
   geolocate.deactivate();
   geolocate.watch = false;
   firstGeolocation = true;

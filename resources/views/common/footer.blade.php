@@ -13,8 +13,9 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/js/OpenLayers.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/js/OpenStreetMap.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/fieldMap.js') }}" ></script>
-<script type="text/javascript" src="{{ asset('assets/plugins/maps/ampInstallMap.js') }}" ></script>
+
 @if(isset($field_coordinates) && !empty($field_coordinates))
+<script type="text/javascript" src="{{ asset('assets/plugins/maps/ampInstallMap.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampmap_plan.js') }}" ></script>
 @endif
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/ampcenter.js') }}" ></script>
@@ -26,7 +27,9 @@
 <script type="text/javascript" src="{{ asset('assets/dist/js/app.min.js') }}" ></script>
 <!-- ChartJS 1.0.1 -->
 <!-- iCheck -->
-<script type="text/javascript" src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}" ></script>
+<!--<script type="text/javascript" src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}" ></script>-->
+
+<script type="text/javascript" src="{{ asset('assets/bootstrap/js/filter.js') }}" ></script>
 
 <!--selectable dropdown inpupt  -->
 <!-- <script type="text/javascript" src="{{ asset('assets/plugins/selectable/jquery.js') }}" ></script>
@@ -35,7 +38,14 @@
 -->
 <script>
 $(document).ready(function() {
-  console.log("loaded");
+
+/*
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-green',
+    increaseArea: '50%' // optional
+  });
+  */
 
   $('body').on('click', '#markers_btn', function () {
     //alert($('#group_id').value());
@@ -103,15 +113,6 @@ $('#fields').on('change', function() {
 });
 
 });
-</script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-green',
-      increaseArea: '50%' // optional
-    });
-  });
 </script>
 @if(isset($logs))
 <script type="text/javascript" src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}" ></script>

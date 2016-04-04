@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('dashboard','Teleamp_Controller@index');
 
 Route::get('amp_database','Teleamp_Controller@database');
@@ -22,7 +18,7 @@ Route::get('amp_database','Teleamp_Controller@database');
 
 Route::get('amp_graphical','Teleamp_Controller@graphical');
 
-Route::get('ampmap_plan','Teleamp_Controller@mapplan');
+
 
 Route::get('/demo','Demo@index');
 
@@ -49,7 +45,22 @@ Route::post('get_chartfilter', 'Teleamp_Controller@limit_filter');
 Route::group(['middleware' => ['web']], function () {
 
   Route::get('amp_install','Teleamp_Controller@install');
+  Route::get('amp_map_plan','Teleamp_Controller@mapplan');
   Route::post('save','Teleamp_Controller@save');
+  Route::post('edit_amp_details','Teleamp_Controller@edit_amp_details');
 
+});
 
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/', function () {
+
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        }
+        return view('auth.login');
+    });
+
+    Route::auth();
+
+    Route::get('/dashboard', 'HomeController@index');
 });

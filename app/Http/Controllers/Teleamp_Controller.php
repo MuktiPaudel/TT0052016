@@ -102,8 +102,14 @@ class Teleamp_Controller extends Controller
       if (isset($request['amplifiers']) && $request['amplifiers'] > 0) {
         $results = DB::table('data_log')->
           where('amp_id', $request['amplifiers'])->get();
-        return view($request['page'], ['logs' => $results, 'data'=> $fields]);
+        $selection = [
+          'amplifier' => DB::table('amplifiers')->where('amp_id', $request['amplifiers'])->first(),
+          'group' => DB::table('amp_group')->where('group_id', $request['groups'])->first(),
+          'field' => DB::table('amp_field')->where('field_id', $request['fields'])->first()
+        ];
+        return view($request['page'], ['logs' => $results, 'data'=> $fields, 'selection' => $selection]);
       }
+
       return view('amp_graphical', ['data'=>$fields]);
     }
 
@@ -158,22 +164,77 @@ class Teleamp_Controller extends Controller
       $fields = DB::table('amp_field')->get();
       //  $result = DB::table('amp_field')->get();
       $query = DB::table('amplifiers')
-      ->join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id');
+      ->join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id')
+      ->leftJoin('data_log as d', function($q) {
+        $q->on('amplifiers.amp_id', '=', 'd.amp_id')
+        ->on('d.time','=',
+          DB::raw('(select max(time) from data_log where amp_id = d.amp_id)')
+        );
+      });
 
       if (isset($request['field_id'])) {
         $query = $query->where('amp_group.field_id', $request['field_id']);
       }
 
-      $query = $query->select('amp_id', 'amplifiers.group_id', 'color', 'name', 'amp_latitude', 'amp_longitude')
+      $query = $query->groupBy('amplifiers.amp_id')
+      ->select('amplifiers.amp_id', 'amplifiers.group_id', 'color', 'name', 'amp_latitude', 'amp_longitude'
+      ,'amp_volume', 'temperature', 'amp_mute', 'amp_ps')
       ->get();
+
+      $field_selection = [
+        'field' => DB::table('amp_field')->where('field_id', $request['field_id'])->first()
+      ];
 
       $amp_coordinates = json_encode($query);
       $field_coordinates = [];
+
       if (isset($request['field_id']))
         $field_coordinates = json_encode(DB::table('amp_field')->where('field_id', $request['field_id'])->select('field_id', 'center_latitude', 'center_longitude')->first());
 
-      return view ('ampmap_plan', ['fields' => $fields, 'amp_coordinates' => $amp_coordinates, 'field_coordinates' => $field_coordinates]);
+      return view ('amp_map_plan', ['field_selection' => $field_selection, 'fields' => $fields, 'amp_coordinates' => $amp_coordinates, 'field_coordinates' => $field_coordinates]);
 
+    }
+
+    public function edit_amp_details(Request $request)
+    {
+      $post = $request->all();
+      $e    = \Validator::make($request->all(),
+      [
+          'amp_id'          => 'required',
+          'amp_volume'      => 'required',
+          'temperature'     => 'required',
+      ]);
+
+      if($e->fails())
+      {
+        return redirect()->back()->withErrors($e->errors());
+      }
+      else
+      {
+        $amp_data = array(
+          'amp_ps'            => isset($post['amp_ps']) ? 1 : 0,
+          'amp_mute'          => isset($post['amp_mute']) ? 1 : 0
+        );
+
+        $latest_log = DB::table('data_log')->where('amp_id',$post['amp_id'])->orderBy('time','desc')->first();
+
+        $logs_data = array(
+          'amp_id'            => $post['amp_id'],
+          'amp_volume'        => $post['amp_volume'],
+          'temperature'       => $post['temperature'],
+          'amp_battery'       => isset($latest_log) ? $latest_log->amp_battery : 0,
+          'amp_delay'         => isset($latest_log) ? $latest_log->amp_delay : 0
+        );
+
+        DB::table('amplifiers')->where('amp_id', $post['amp_id'])->update($amp_data);
+        $i = DB::table('data_log')->insert($logs_data);
+        if ($i <= 0) {
+          \Session::flash('message','Saving failed');
+          return redirect('amp_map_plan');
+        }
+        \Session::flash('message','Record have been added successfully');
+        return redirect('amp_map_plan');
+      }
     }
 
 }

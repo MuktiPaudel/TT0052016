@@ -9,13 +9,13 @@
 
     <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" >
 
-    <link href="{{ asset('assets/dist/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('assets/dist/css/TeleAmp.css') }}" rel="stylesheet" type="text/css" >
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link href="{{ asset('assets/dist/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('assets/dist/css/TeleAmp.min.css') }}" rel="stylesheet" type="text/css" >
 
     <link href="{{ asset('assets/dist/css/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" >
 

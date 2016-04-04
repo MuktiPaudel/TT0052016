@@ -53,8 +53,8 @@
         </a>
       </li>
 
-      <li class="{{ Request::is('ampmap_plan') ? "active" : "" }}">
-        <a href="ampmap_plan">
+      <li class="{{ Request::is('amp_map_plan') ? "active" : "" }}">
+        <a href="amp_map_plan">
           <i class="fa fa-map-marker"></i> <span>Maps</span>
         </a>
       </li>

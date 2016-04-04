@@ -9,10 +9,11 @@
          <div class="box-header with-border">
      <div class="row">
           <div class="col-sm-5">
-    <button type="submit" class="btn btn-success btn-sm pull-left">Oulu -1</button>
-    <button type="submit" class="btn btn-success btn-sm pull-left">Left</button>
-    <button type="submit" class="btn btn-success btn-sm pull-left">01</button>
-
+    @if(isset($selection))
+    <button type="submit" class="btn btn-success btn-sm pull-left">{{ $selection['field']->field_name }}</button>
+    <button type="submit" class="btn btn-success btn-sm pull-left">{{ $selection['group']->name }}</button>
+    <button type="submit" class="btn btn-success btn-sm pull-left">{{ $selection['amplifier']->mac_id }}</button>
+    @endif
     </div>
   <div class="col-sm-5">
     <button type="submit" class="btn btn-primary btn-sm pull-left">Battery(%)</button>
