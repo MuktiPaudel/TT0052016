@@ -108,7 +108,7 @@
 
 
                           <div id="myModal_{{ $amp['amp_id'] }}" class="modal">
-                            <form action="{{action('Teleamp_Controller@edit_amp_details')}}" method="POST">
+                            <form action="{{action('Teleamp_Controller@edit_amp_details')}}" method="POST" onsubmit="return submit_amp_details(this)">
                               <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
                               <input type="hidden" name="amp_id" value="{{ $amp['amp_id'] }}">
                                      <div class="modal-dialog">
@@ -185,4 +185,17 @@
       </div><!-- /.content-wrapper -->
 
 
+    @endsection
+
+    @section('js')
+    <script>
+      function submit_amp_details(form) {
+        var modal = $(form).closest('.modal');
+        var data = $(form).serialize();
+        $.post($(form).attr('action'), data, function() {
+          modal.modal('hide');
+        });
+        return false;
+      }
+    </script>
     @endsection

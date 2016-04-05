@@ -229,11 +229,9 @@ class Teleamp_Controller extends Controller
         DB::table('amplifiers')->where('amp_id', $post['amp_id'])->update($amp_data);
         $i = DB::table('data_log')->insert($logs_data);
         if ($i <= 0) {
-          \Session::flash('message','Saving failed');
-          return redirect('amp_map_plan');
+          return response()->json(['success' => false]);
         }
-        \Session::flash('message','Record have been added successfully');
-        return redirect('amp_map_plan');
+        return response()->json(['success' => true]);
       }
     }
 
