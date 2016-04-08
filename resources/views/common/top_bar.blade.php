@@ -52,38 +52,40 @@
         </li>
 
         <!-- User Account: style can be found in dropdown.less -->
+        @if (Auth::check())
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img class="user-image" alt="User Image"
                 src="{{asset("assets/dist/img/avatar5.png")}}">
-            <span class="hidden-xs">Ville</span>
-          </a>
+              </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <p>
-                Ville- System Designer
+                  {{ Auth::user()->name }}
+                  <small>{{ Auth::user()->created_at->diffForHumans() }}</small>
               </p>
             </li>
+
             <!-- Menu Body -->
                     <li class="user-body">
                       <div class="row">
 
                         <div class="col-xs-4 text-center sty">
-                         <button type="submit" class="btn btn-warning">
+                         <button class="btn btn-warning">
                            <i class="fa fa-lg fa-gears (alias)"></i>
                          </button>
                         </div>
 
                         <div class="col-xs-4 text-center">
-                          <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-lg fa-user"></i>
+                          <button class="btn btn-primary">
+                            <a href="{{ url('/register') }}" class="fa fa-lg fa-user"></a>                      
                           </button>
                         </div>
 
-      				  <div class="col-xs-4 text-center">
-                          <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-lg fa-power-off"></i>
+      				         <div class="col-xs-4 text-center">
+                          <button class="btn btn-primary">
+                            <a href="{{ url('/logout') }}" class="fa fa-lg fa-power-off"></a>
                           </button>
                           <!--
                           <button type="submit" class="btn btn-primary">
@@ -96,9 +98,9 @@
                       <!-- /.row -->
                     </li>
                     <!-- Menu Footer-->
-
           </ul>
         </li>
+           @endif
 
       </ul>
     </div>

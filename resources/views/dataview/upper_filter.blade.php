@@ -6,6 +6,7 @@
       <!-- /.box-header -->
       <!-- form start -->
 <form action="{{action('Teleamp_Controller@filters')}}"  role="form" method="post">
+  {{ csrf_field() }}
   <input type="hidden" name="page" value="amp_database">
          <div class="box-body">
     <div class="row">

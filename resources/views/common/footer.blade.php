@@ -30,6 +30,13 @@
 <!--<script type="text/javascript" src="{{ asset('assets/plugins/iCheck/icheck.min.js') }}" ></script>-->
 
 <script type="text/javascript" src="{{ asset('assets/bootstrap/js/filter.js') }}" ></script>
+<script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token' : "{{ csrf_token() }}"
+    }
+  });
+</script>
 
 <!--selectable dropdown inpupt  -->
 <!-- <script type="text/javascript" src="{{ asset('assets/plugins/selectable/jquery.js') }}" ></script>
