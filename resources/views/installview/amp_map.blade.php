@@ -4,6 +4,7 @@
             <script>
               var coordinates = {!! isset($amp_coordinates) ? $amp_coordinates : '[]' !!};
               var center = {!! isset($field_coordinates) ? $field_coordinates : '[]' !!};
+              var field_id = {!! isset($field) ? $field->field_id : '' !!};
             </script>
               <div class="pad">
                 <!-- Map will be created here -->

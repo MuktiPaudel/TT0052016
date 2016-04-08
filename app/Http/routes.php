@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
   $this->post('register', 'Auth\AuthController@register');
 
   Route::get('amp_install','Teleamp_Controller@install');
+  Route::post('update_amp_group', 'Teleamp_Controller@update_amp_group');
+
   Route::get('amp_map_plan','Teleamp_Controller@mapplan');
   Route::post('save','Teleamp_Controller@save');
   Route::post('edit_amp_details','Teleamp_Controller@edit_amp_details');

@@ -21,10 +21,73 @@ class Teleamp_Controller extends Controller
       $field = DB::table('amp_field')->first();
 
     //  $result = DB::table('amp_field')->get();
-      $amp_coordinates = json_encode(DB::table('amplifiers')->select('amp_id', 'amp_latitude', 'amp_longitude')->get());
+      $amp_coordinates = json_encode(
+        DB::table('amplifiers')
+        ->join('amp_group', 'amp_group.group_id', '=', 'amplifiers.group_id')
+        ->select('amp_id', 'mac_id', 'amp_latitude', 'amp_longitude', 'name', 'color')
+        ->get());
       $field_coordinates = json_encode($field);
 
       return view ('amp_install', ['field' => $field, 'amp_coordinates' => $amp_coordinates, 'field_coordinates' => $field_coordinates]);
+    }
+
+    public function update_amp_group(Request $request) {
+
+      $v    = \Validator::make($request->all(),
+      [
+          'amp_id'        => 'required',
+          'group_name'     => 'required',
+          'group_color'    => 'required',
+          'field_id'      => 'required'
+      ]);
+      if($v->fails())
+      {
+        return redirect()->back()->withErrors($v->errors());
+      }
+
+      // Find existing group
+      $group = DB::table('amp_group')
+      ->where('name', $request['group_name'])
+      ->where('field_id', $request['field_id'])
+      ->first();
+
+      // If found, update it
+      if ($group) {
+
+        $data = [
+          'color' => $request['group_color']
+        ];
+
+        DB::table('amp_group')
+        ->where('name', $request['group_name'])
+        ->where('field_id', $request['field_id'])
+        ->update($data);
+      }
+
+      // Otherwise, create a new one
+      else {
+        $data = [
+          'name' => $request['group_name'],
+          'color' => $request['group_color'],
+          'field_id' =>  $request['field_id']
+        ];
+        DB::table('amp_group')->insert($data);
+
+        $group = DB::table('amp_group')
+        ->where('name', $request['group_name'])
+        ->first();
+      }
+
+      // Update amplifier
+      if ($group) {
+
+        $data = [
+          'group_id' => $group->group_id
+        ];
+        DB::table('amplifiers')->where('amp_id', $request['amp_id'])->update($data);
+      }
+
+      return redirect()->back();
     }
 
 

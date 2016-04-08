@@ -32,7 +32,7 @@ ampmap_plan = new OpenLayers.Map("devicemap_plan", {
      var feature = new OpenLayers.Feature.Vector(
              new OpenLayers.Geometry.Point( coordinates[i]['amp_latitude'], coordinates[i]['amp_longitude'] ).transform(epsg4326, projectTo),
              {description:( coordinates[i]['amp_id'])} ,
-             {externalGraphic: 'assets/plugins/maps/js/img/marker-red.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+             {externalGraphic: 'assets/plugins/maps/js/img/marker-' + coordinates[i]['color'] + '.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
          );
      vectorLayer.addFeatures(feature);
      ampmap_plan.addLayer(vectorLayer);

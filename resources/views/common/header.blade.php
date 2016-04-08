@@ -24,7 +24,9 @@
 
     <!-- iCheck -->
     <link href="{{ asset('assets/plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" >
-
+    <script>
+      var csrf_token = "{!! csrf_token() !!}";
+    </script>
 
   </head>
   <body class="hold-transition skin-green sidebar-mini" style="height:100%;">

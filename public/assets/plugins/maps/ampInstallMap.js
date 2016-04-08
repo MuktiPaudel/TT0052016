@@ -26,40 +26,44 @@
 
     var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
-	  var html =
-        "<div class='box-body'>"+
-         "<div class='row'>"+
-          "<div class='col-md-9 col-sm-6'>"+
-           "<form-group id='group_form'>" +
-
-				" <label>Amp-ID : 10</label>" +
-						    "<input id='group_id' type='text' name='field_group' class='form-control' value 'whatever'style='width: 100%;'></input>"+
-
-				"<br><select id='group_color' name='color' class='form-control select2' style='width: 100%;'>"+
-							  "<option selected='selected'>Color</option>"+
-							  "<option value='Red'>Red</option>"+
-							  "<option value='Green'>Green</option>"+
-							  "<option value='Blue'>Blue</option>"+
-							  "<option value='Yellow'>Yellow</option>"+
-							  "<option value='Black'>Black</option>"+
-							  "<option value='Indigo'>Indigo</option>"+
-                "<option value='Purple'>Purple</option>"+
-							  "<option value='Brown'>Brown</option>"+
-						"</select>"+
-
-  						"<br><button id='markers_btn' type='button' class='btn btn-block btn-success'>Save</button>";
-
-					"</form-group>"+
-          "</div>"+
-          "</div>"+
-    "</div>";
-
       for (var i = 0; i < coordinates.length; i++) {
+    	  var html =
+            "<div class='box-body'><form action='update_amp_group' method='POST'>"+
+            "<input type='hidden' name='_token' value='" + csrf_token + "'>"+
+            "<input type='hidden' name='field_id' value='" + field_id + "'>"+
+            "<input type='hidden' name='amp_id' value='" + coordinates[i]['amp_id']+ "'>"+
+             "<div class='row'>"+
+              "<div class='col-md-9 col-sm-6'>"+
+               "<form-group id='group_form'>" +
+          " <h4>Amp Id: " + coordinates[i]['mac_id'] + "</h4>"+
+    			" <label>Group Name</label>" +
+    						    "<input id='group_name' type='text' name='group_name' class='form-control' value='" + (coordinates[i]['name'] !== undefined ? coordinates[i]['name'] : '') + "' 'whatever'style='width: 100%;'></input>"+
+
+         " <label> Group Color</label>" +
+    				"<br><select id='group_color' name='group_color' class='form-control select2' style='width: 100%;'>"+
+    							  "<option >Color</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Red' ? "selected='selected'" : '' )+" value='Red'>Red</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Green' ? "selected='selected'" : '' )+" value='Green'>Green</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Blue' ? "selected='selected'" : '' )+" value='Blue'>Blue</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Yellow' ? "selected='selected'" : '' )+" value='Yellow'>Yellow</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Black' ? "selected='selected'" : '' )+" value='Black'>Black</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Indigo' ? "selected='selected'" : '' )+" value='Indigo'>Indigo</option>"+
+                    "<option "+(coordinates[i]['color'] == 'Purple' ? "selected='selected'" : '' )+" value='Purple'>Purple</option>"+
+    							  "<option "+(coordinates[i]['color'] == 'Brown' ? "selected='selected'" : '' )+" value='Brown'>Brown</option>"+
+    						"</select>"+
+
+      						"<br><button id='markers_btn' type='submit' class='btn btn-block btn-success'>Save</button>" +
+
+    					"</form-group>"+
+              "</div>"+
+              "</div>"+
+        "</form></div>";
+
         // Define markers as "features" of the vector layer:
         var feature = new OpenLayers.Feature.Vector(
                 new OpenLayers.Geometry.Point( coordinates[i]['amp_latitude'], coordinates[i]['amp_longitude'] ).transform(epsg4326, projectTo),
                 {description: html} ,
-                {externalGraphic: 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+                {externalGraphic: 'assets/plugins/maps/js/img/marker-' + (coordinates[i]['color'] ? coordinates[i]['color'] : 'red') + '.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
             );
         vectorLayer.addFeatures(feature);
         installmap.addLayer(vectorLayer);
