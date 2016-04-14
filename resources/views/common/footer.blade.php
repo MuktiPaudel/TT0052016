@@ -71,7 +71,7 @@ $('#groups').on('change', function() {
     method: 'POST',
      type: 'POST',
      //dataType: 'application/json',
-     data: {'field' : $('#groups').val()},
+     data: {'group' : $('#groups').val()},
      cache: false,
      url: "get_amplifiers",
      success: function(ret) {

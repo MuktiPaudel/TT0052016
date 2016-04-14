@@ -13,7 +13,7 @@
 <div class="box-body">
 <div class="row">
 <!-- /.col -->
-<div id="collapsible-tables">
+<div>
 <table class="col-sm-12 table-bordered table-striped table-hover table-condensed cf">
 
 @if (isset($logs))
