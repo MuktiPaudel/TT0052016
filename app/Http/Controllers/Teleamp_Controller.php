@@ -268,7 +268,7 @@ class Teleamp_Controller extends Controller
       }
 
       $query = $query->groupBy('amplifiers.amp_id')
-      ->select('amplifiers.amp_id', 'amplifiers.group_id', 'color', 'name', 'amp_latitude', 'amp_longitude'
+      ->select('amplifiers.amp_id', 'mac_id', 'amplifiers.group_id', 'color', 'name', 'amp_latitude', 'amp_longitude'
       ,'amp_volume', 'temperature', 'amp_mute', 'amp_ps')
       ->get();
 

@@ -86,7 +86,8 @@
                       <table class="table no-margin">
                         <thead>
                         <tr>
-                          <th>AmpID</th>
+                          <th>ID</th>
+                          <th>MacID</th>
                           <th>Group</th>
                           <th>color</th>
                           <th>Action</th>
@@ -97,6 +98,7 @@
                           @foreach (json_decode($amp_coordinates, true) as $amp)
                           <tr>
                             <td><a href="#">{{ $amp['amp_id'] }}</a></td>
+                            <td>{{ $amp['mac_id'] }}</a></td>
                             <td>{{ $amp['name'] }}</td>
                             <td><img src="assets/plugins/maps/js/img/marker-{{ $amp['color'] }}.png"></td>
                             <td><button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal_{{ $amp['amp_id'] }}">

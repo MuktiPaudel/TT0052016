@@ -19,36 +19,20 @@
             <table class="table no-margin">
               <thead>
               <tr>
-                <th>AmpID</th>
+                <th>Mac_ID</th>
                 <th>Group</th>
-                <th>Action</th>
+                <th>Marker</th>
 
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td><a href="#">01</a></td>
-                <td>Left</td>
-                <td> <a href="www.google.com" class="label label-success" role="button">Edit</a></td>
-              </tr>
-              <tr>
-                <td><a href="#">02</a></td>
-                <td>Left</td>
-                <td><span class="label label-success">Edit</span></td>
-
-              </tr>
-              <tr>
-                <td><a href="#">03</a></td>
-                <td>Left</td>
-                <td><span class="label label-success">Edit</span></td>
-              </tr>
-              <tr>
-                <td><a href="#">04</a></td>
-                <td>Right</td>
-                <td><span class="label label-danger">Edit</span></td>
-
-              </tr>
-
+                @foreach (json_decode($amp_coordinates, true) as $amp)
+                <tr>
+                  <td>{{ $amp['mac_id'] }}</a></td>
+                  <td>{{ $amp['group']['name'] }}</td>
+                  <td><img src="assets/plugins/maps/js/img/marker-{{ $amp['group']['color'] }}.png"></td>
+                </tr>
+              @endforeach
         </tbody>
             </table>
           </div>
