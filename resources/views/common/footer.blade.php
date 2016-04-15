@@ -54,22 +54,14 @@ $(document).ready(function() {
   });
   */
 
-  $('body').on('click', '#markers_btn', function () {
-    //alert($('#group_id').value());
-    console.log('clicked');
-  });
-
-  function saveData() {
-
-  }
-
+/*  The ajax call which fetches the amplifiers when we select the group from dropdown */
 
 $('#groups').on('change', function() {
   console.log("value changed");
   if ($(this).val())
     $.ajax({
     method: 'POST',
-     type: 'POST',
+    type: 'POST',
      //dataType: 'application/json',
      data: {'group' : $('#groups').val()},
      cache: false,
@@ -77,7 +69,7 @@ $('#groups').on('change', function() {
      success: function(ret) {
        console.log(ret);
        //console.log(JSON.parse(ret.responseText));
-//JSON.parse(ret.responseText)
+       //JSON.parse(ret.responseText)
        var selectbox = $('#amplifiers');
        selectbox.find('option').remove();
        $.each(ret, function(key, value) {
@@ -91,12 +83,13 @@ $('#groups').on('change', function() {
    });
 });
 
+/* The ajax call which fetches the group when the field is selected from dropdown   */
 
 $('#fields').on('change', function() {
   console.log("value changed");
   if ($(this).val())
     $.ajax({
-    method: 'POST',
+     method: 'POST',
      type: 'POST',
      //dataType: 'application/json',
      data: {'field' : $('#fields').val()},
