@@ -26,7 +26,7 @@
               </tr>
               </thead>
               <tbody>
-                <!--  In map javascript file we have encoded these parameters so we need to decode them  -->
+                <!--  In controller we have encoded these parameters so we need to decode them  -->
                 @foreach (json_decode($amp_coordinates, true) as $amp)
                 <tr>
                   <td>{{ $amp['mac_id'] }}</a></td>

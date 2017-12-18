@@ -79,7 +79,7 @@
 
                         <div class="col-xs-4 text-center">
                           <button class="btn btn-primary">
-                            <a href="{{ url('/register') }}" class="fa fa-lg fa-user"></a>                      
+                            <a href="{{ url('/register') }}" class="fa fa-lg fa-user"></a>
                           </button>
                         </div>
 

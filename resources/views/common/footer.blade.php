@@ -2,14 +2,14 @@
   <div class="pull-right hidden-xs">
     <b>Version</b> 1.0.0
   </div>
-  <strong>Copyright &copy; 2016<a href="">Qlu Oy</a>.</strong> All rights reserved.
+  <strong>Copyright &copy; 2016<a href="">Telesilmukka Oy</a>.</strong> All rights reserved.
 </footer>
 
 <div class="control-sidebar-bg"></div>
 
 </div><!-- ./wrapper -->
 
-<!-- jQuery 2.1.4 -->
+<!-- Openlayers files -->
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/js/OpenLayers.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/js/OpenStreetMap.js') }}" ></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/maps/fieldMap.js') }}" ></script>
@@ -98,7 +98,7 @@ $('#fields').on('change', function() {
      success: function(rets) {
        console.log(rets);
        //console.log(JSON.parse(ret.responseText));
-//JSON.parse(ret.responseText)
+       //JSON.parse(ret.responseText)
        var groupselectbox = $('#groups');
        groupselectbox.find('option').remove();
        $.each(rets, function(key, value) {

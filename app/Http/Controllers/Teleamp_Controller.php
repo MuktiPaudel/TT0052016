@@ -81,13 +81,13 @@ class Teleamp_Controller extends Controller
       return redirect()->back();
     }
 
-
+    // Fetches the groups from the selected Fields, it works for all the filters we use.
   public function list_groups(Request $request)
    {
     $groups = Group::where('field_id', $request['field'])->lists('name', 'group_id');
     return response()->json($groups);
     }
-
+  // Fetches the amplifiers from the selected Group,  it works for all the filters we use.
     public function list_amplifiers(Request $request)
     {
       $amplifiers = Amplifier::where('group_id', $request['group'])->lists('mac_id', 'amp_id');
